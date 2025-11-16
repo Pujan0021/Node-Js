@@ -2,6 +2,14 @@ const readline = require('readline');
 const fs = require('fs');
 const http = require('http');
 const url = require('url');
+const events = require('events');
+
+
+
+
+// custom module
+const replaceHtml = require('../Modules/replaceHtml');
+const user = require('../Modules/user');
 // const data = readline.createInterface({
 //     input: process.stdin,
 //     output: process.stdout
@@ -85,13 +93,6 @@ const productList = fs.readFileSync('../Template/product-list.html', 'utf-8');
 const productDetail = fs.readFileSync('../Template/product-detail.html', 'utf-8');
 const products = JSON.parse(fs.readFileSync('../Data/products.json', 'utf-8'));
 
-const replaceHtml = (template, product) => {
-    let output = template.replace('{{%image%}}', product.image);
-    output = output.replace('{{%name%}}', product.name);
-    output = output.replace('{{%series%}}', product.series);
-    output = output.replace('{{%id%}}', product.id);
-    return output;
-}
 
 const createServer = http.createServer((request, response) => {
     console.log('Server created........');
@@ -147,3 +148,9 @@ createServer.listen(8000, '127.0.0.1', () => {
 
 
 
+//Emmitting and Handling Custom Events
+let myEmitter = new user();
+myEmitter.on('User-Created', (id, name) => {
+    console.log(`A new user ${name} has been created !`)
+})
+myEmitter.emit('User-Created', 45, 'Aman');
