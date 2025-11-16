@@ -1,0 +1,5 @@
+This is the content of index.txt 
+
+ This is the content of  append file. 
+
+ 'Date: ' Thu Nov 13 2025 23:10:57 GMT+0545 (Nepal Time)

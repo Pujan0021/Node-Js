@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <link
+      rel="stylesheet"
+      href="./style.css"
+      rel="stylesheet"
+      type="text/css"
+    /> -->
+    <style>
+      img {
+        height: 300px;
+        width: 300px;
+      }
+      .series {
+        font-size: 30px;
+        background: blue;
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+      }
+      .content {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 30px;
+      }
+      .name {
+        font-size: 30px;
+        background: blue;
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+      }
+      .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(25, 29, 48);
+        width: 700px;
+        margin: auto;
+        border-radius: 30px;
+        color: white;
+      }
+      /* .sub {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        border-radius: 20px;
+      } */
+      ul {
+        display: flex;
+        justify-content: space-evenly;
+        width: 600px;
+        align-items: center;
+        border-radius: 20px;
+      }
+      li {
+        list-style: none;
+      }
+      a {
+        color: white;
+        text-decoration: none;
+        font-size: 30px;
+      }
+      p {
+        text-align: center;
+        font-size: 40px;
+        background-color: green;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="sub">
+        <ul>
+          <li><a href="Home">Home</a></li>
+          <li><a href="About">About</a></li>
+          <li><a href="Products">Product</a></li>
+          <li><a href="Contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    {{%content%}}
+  </body>
+</html>

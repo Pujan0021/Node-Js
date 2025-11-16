@@ -1,0 +1,32 @@
+[
+  {
+    "id": 0,
+    "name": "Samsung Galaxy S24 Ultra",
+    "series": "Galaxy S",
+    "image": "https://images.samsung.com/is/image/samsung/p6pim/in/sm-s928bzwdins/gallery/in-galaxy-s24-ultra-sm-s928-491263-sm-s928bzwdins-537264979"
+  },
+  {
+    "id": 1,
+    "name": "Samsung Galaxy Z Fold5",
+    "series": "Galaxy Z",
+    "image": "https://images.samsung.com/is/image/samsung/p6pim/in/sm-f946bzkdins/gallery/in-galaxy-z-fold5-f946-sm-f946bzkdins-537264979"
+  },
+  {
+    "id": 2,
+    "name": "Samsung Galaxy A54 5G",
+    "series": "Galaxy A",
+    "image": "https://images.samsung.com/is/image/samsung/p6pim/in/sm-a546ezwdins/gallery/in-galaxy-a54-5g-sm-a546-537264979"
+  },
+  {
+    "id": 3,
+    "name": "Samsung Galaxy M14",
+    "series": "Galaxy M",
+    "image": "https://images.samsung.com/is/image/samsung/p6pim/in/sm-m146bdbdins/gallery/in-galaxy-m14-5g-sm-m146-537264979"
+  },
+  {
+    "id": 4,
+    "name": "Samsung Galaxy F15",
+    "series": "Galaxy F",
+    "image": "https://images.samsung.com/is/image/samsung/p6pim/in/sm-e156bzgdins/gallery/in-galaxy-f15-sm-e156-537264979"
+  }
+]
