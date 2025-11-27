@@ -280,11 +280,24 @@
 
 // Read Html File
 let fs = require("fs");
+let url = require("url");
+// let http = require(http)
 let readHtml = fs.readFileSync("../Template/index.html", "utf-8");
+let productPage = fs.readFileSync("../Template/product.html", "utf-8");
+let jsonData = fs.readFileSync("../Data/products.json", "utf-8");
+let data = JSON.parse(jsonData);
+
+const replaceHtmlProduct = (template, product) => {
+    let output = template.replace('{{%name%}}', product.name);
+    output = template.replace('{{%series%}}', product.series);
+
+}
 
 let http = require('http');
 const server = http.createServer((request, response) => {
     console.log("A new Server Created");
+    let x = url.parse(request.url, true)
+    console.log(x)
     let path = request.url;
     if (path === "/" || path.toLowerCase() === "/home") {
         response.writeHead(200, {
@@ -307,8 +320,11 @@ const server = http.createServer((request, response) => {
         response.writeHead(200, {
             'Content-Type': 'text/html'
         });
+        // if () {
 
-        response.end(readHtml.replace("{{%content%}}", "You are currently in Product Page"));
+        // }
+
+        response.end(readHtml.replace("{{%content%}}",));
     } else {
         response.writeHead(400);
 
