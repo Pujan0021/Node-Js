@@ -278,61 +278,64 @@
 // })
 
 
-// Read Html File
+
+
 let fs = require("fs");
+let http = require("http");
 let url = require("url");
-// let http = require(http)
-let readHtml = fs.readFileSync("../Template/index.html", "utf-8");
-let productPage = fs.readFileSync("../Template/product.html", "utf-8");
-let jsonData = fs.readFileSync("../Data/products.json", "utf-8");
-let data = JSON.parse(jsonData);
 
-const replaceHtmlProduct = (template, product) => {
-    let output = template.replace('{{%name%}}', product.name);
-    output = template.replace('{{%series%}}', product.series);
 
-}
+let htmlFile = fs.readFileSync("../Template/index.html", "utf-8");
+let productFile = fs.readFileSync("../Template/product-list.html", "utf-8");
+let jsonFile = fs.readFileSync("../Data/products.json", "utf-8");
+let dataFile = JSON.parse(jsonFile);
+console.log(dataFile);
+let product = dataFile.map((prod) => {
+    return (productFile.replace("{{%series%}}", prod.series).replace("{{%name%}}", prod.name).replace("{{%image%}}", prod.image).replace("{{%id%}}", prod.id));
+}).join("");
 
-let http = require('http');
-const server = http.createServer((request, response) => {
-    console.log("A new Server Created");
-    let x = url.parse(request.url, true)
-    console.log(x)
-    let path = request.url;
-    if (path === "/" || path.toLowerCase() === "/home") {
-        response.writeHead(200, {
-            'Content-Type': 'text/html'
-        });
-        response.end(readHtml.replace("{{%content%}}", "You are currently in Home Page"));
-    } else if (path.toLowerCase() === "/about") {
-        response.writeHead(200, {
-            'Content-Type': 'text/html'
-        });
 
-        response.end(readHtml.replace("{{%content%}}", "You are currently in About Page"));
-    } else if (path.toLocaleLowerCase() === "/contact") {
-        response.writeHead(200, {
-            'Content-Type': 'text/html'
-        });
+let server = http.createServer((req, res) => {
+    // let path = req.url;
+    let { query, pathname: path } = url.parse(req.url, true);
+    // res.end("Hello From Server");s
+    if (path === "/" || path.toLocaleLowerCase() === "/home") {
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(htmlFile.replace("{{%content%}}", "You Are In Home Page"))
 
-        response.end(readHtml.replace("{{%content%}}", "You are currently in Contact Page"));
+    } else if (path.toLocaleLowerCase() === "/about") {
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(htmlFile.replace("{{%content%}}", "You Are In About Page"))
     } else if (path.toLocaleLowerCase() === "/products") {
-        response.writeHead(200, {
-            'Content-Type': 'text/html'
-        });
-        // if () {
+        res.writeHead(200, {
 
-        // }
+            "Content-Type": "text/html"
+        }
+        )
+        if (!query.id) {
 
-        response.end(readHtml.replace("{{%content%}}",));
+            res.end(htmlFile.replace("{{%content%}}", product))
+        } else {
+            let singleProductHtml = fs.readFileSync("../Template/product.html", "utf-8");
+            const singleProduct = dataFile.find(p => p.id == query.id);
+            if (singleProduct) {
+                res.end(singleProductHtml.replace("{{%series%}}", singleProduct.series).replace("{{%name%}}", singleProduct.name))
+            } else {
+                res.end(htmlFile.replace("{{%content%}}", "Product not Found"))
+            }
+
+
+        }
+
+    } else if (path.toLocaleLowerCase() === "/contact") {
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(htmlFile.replace("{{%content%}}", "You Are In Contact Page"))
+
     } else {
-        response.writeHead(400);
-
-        response.end("404:  Error Not Found")
+        res.end()
     }
 });
-
-server.listen(8000, '127.0.0.1', () => {
-    console.log("Server Started")
+server.listen(8000, () => {
+    console.log("Server Created");
 })
 
