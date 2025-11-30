@@ -280,62 +280,87 @@
 
 
 
+// let fs = require("fs");
+// let http = require("http");
+// let url = require("url");
+
+
+// let htmlFile = fs.readFileSync("../Template/index.html", "utf-8");
+// let productFile = fs.readFileSync("../Template/product-list.html", "utf-8");
+// let jsonFile = fs.readFileSync("../Data/products.json", "utf-8");
+// let dataFile = JSON.parse(jsonFile);
+// // console.log(dataFile);
+// let product = dataFile.map((prod) => {
+//     return (productFile.replace("{{%series%}}", prod.series).replace("{{%name%}}", prod.name).replace("{{%image%}}", prod.image).replace("{{%id%}}", prod.id));
+// }).join("");
+
+
+// let server = http.createServer((req, res) => {
+//     // let path = req.url;
+//     let { query, pathname: path } = url.parse(req.url, true);
+//     // res.end("Hello From Server");s
+//     if (path === "/" || path.toLocaleLowerCase() === "/home") {
+//         res.writeHead(200, { "Content-Type": "text/html" });
+//         res.end(htmlFile.replace("{{%content%}}", "You Are In Home Page"))
+
+//     } else if (path.toLocaleLowerCase() === "/about") {
+//         res.writeHead(200, { "Content-Type": "text/html" });
+//         res.end(htmlFile.replace("{{%content%}}", "You Are In About Page"))
+//     } else if (path.toLocaleLowerCase() === "/products") {
+//         res.writeHead(200, {
+
+//             "Content-Type": "text/html"
+//         }
+//         )
+//         if (!query.id) {
+
+//             res.end(htmlFile.replace("{{%content%}}", product))
+//         } else {
+//             let singleProductHtml = fs.readFileSync("../Template/product.html", "utf-8");
+//             const singleProduct = dataFile.find(p => p.id == query.id);
+//             if (singleProduct) {
+//                 res.end(singleProductHtml.replace("{{%series%}}", singleProduct.series).replace("{{%name%}}", singleProduct.name))
+//             } else {
+//                 res.end(htmlFile.replace("{{%content%}}", "Product not Found"))
+//             }
+
+
+//         }
+
+//     } else if (path.toLocaleLowerCase() === "/contact") {
+//         res.writeHead(200, { "Content-Type": "text/html" });
+//         res.end(htmlFile.replace("{{%content%}}", "You Are In Contact Page"))
+
+//     } else {
+//         res.end()
+//     }
+// });
+// server.listen(8000, () => {
+//     console.log("Server Created");
+// })
+
+
+
+
+
+
+// Express
+
+let express = require("express");
+let app = express();
 let fs = require("fs");
-let http = require("http");
-let url = require("url");
+let movies = JSON.parse(fs.readFileSync("../Data/products.json", "utf-8"));
 
-
-let htmlFile = fs.readFileSync("../Template/index.html", "utf-8");
-let productFile = fs.readFileSync("../Template/product-list.html", "utf-8");
-let jsonFile = fs.readFileSync("../Data/products.json", "utf-8");
-let dataFile = JSON.parse(jsonFile);
-console.log(dataFile);
-let product = dataFile.map((prod) => {
-    return (productFile.replace("{{%series%}}", prod.series).replace("{{%name%}}", prod.name).replace("{{%image%}}", prod.image).replace("{{%id%}}", prod.id));
-}).join("");
-
-
-let server = http.createServer((req, res) => {
-    // let path = req.url;
-    let { query, pathname: path } = url.parse(req.url, true);
-    // res.end("Hello From Server");s
-    if (path === "/" || path.toLocaleLowerCase() === "/home") {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end(htmlFile.replace("{{%content%}}", "You Are In Home Page"))
-
-    } else if (path.toLocaleLowerCase() === "/about") {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end(htmlFile.replace("{{%content%}}", "You Are In About Page"))
-    } else if (path.toLocaleLowerCase() === "/products") {
-        res.writeHead(200, {
-
-            "Content-Type": "text/html"
-        }
-        )
-        if (!query.id) {
-
-            res.end(htmlFile.replace("{{%content%}}", product))
-        } else {
-            let singleProductHtml = fs.readFileSync("../Template/product.html", "utf-8");
-            const singleProduct = dataFile.find(p => p.id == query.id);
-            if (singleProduct) {
-                res.end(singleProductHtml.replace("{{%series%}}", singleProduct.series).replace("{{%name%}}", singleProduct.name))
-            } else {
-                res.end(htmlFile.replace("{{%content%}}", "Product not Found"))
-            }
-
-
-        }
-
-    } else if (path.toLocaleLowerCase() === "/contact") {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end(htmlFile.replace("{{%content%}}", "You Are In Contact Page"))
-
-    } else {
-        res.end()
-    }
-});
-server.listen(8000, () => {
-    console.log("Server Created");
+app.listen(8000, (req, res) => {
+    console.log("Server started working....................");
 })
 
+app.get("/api/v1/movies", (req, res) => {
+    res.status(200).json({
+        status: "success",
+        data: {
+            movies: movies
+        }
+    });
+
+})
