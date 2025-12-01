@@ -388,6 +388,68 @@ app.post("/api/v1/movies", (req, res) => {
 
 
 app.get("/api/v1/movies/:id", (req, res) => {
-    console.log(req.params)
-    req.send("Hello")
+
+    const id = req.params.id * 1;
+    let movie = movies.find(elem => elem.id == id);
+    if (!movie) {
+        return res.status(404).json({
+            status: "Failed",
+            data: {
+                message: "Movie with the given id Doesnot Exist........!"
+            }
+        })
+    }
+    res.status(200).json({
+        status: "success",
+        data: {
+            movies: movie
+        }
+    })
+})
+
+app.patch('/api/v1/movies/:id', (req, res) => {
+    const id = req.params.id * 1;
+    let movieToUpdate = movies.find(ele => ele.id === id);
+    if (!movieToUpdate) {
+        return res.sendStatus(404).json({
+            status: "success",
+            data: {
+                message: "No Movie Matched With the ID"
+            }
+        })
+    }
+    let indexOfMovie = movies.indexOf(movieToUpdate);
+    let updatedMovie = { ...movieToUpdate, ...req.body }
+    movies[indexOfMovie] = updatedMovie;
+    fs.writeFile('../Data/products.json', JSON.stringify(movies), () => {
+        res.status(200).json({
+            status: "success",
+            data: {
+                movies: updatedMovie
+            }
+        })
+    })
+})
+
+app.delete("/api/v1/movies/:id", (req, res) => {
+    const id = req.params.id * 1;
+    let movieToDelete = movies.find(ele => ele.id === id);
+    if (!movieToDelete) {
+        return res.status(404).json({
+            status: "Failed",
+            data: {
+                message: "Movie with the given id doesnot exist........!"
+            }
+        })
+    }
+    let index = movies.indexOf(movieToDelete);
+    movies.splice(index, 1);
+    fs.writeFile("../Data/products.json", JSON.stringify(movies), () => {
+        res.status(200).json({
+            status: "success",
+            data: {
+                movies: null
+            }
+        })
+    })
 })
