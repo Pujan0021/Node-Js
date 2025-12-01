@@ -346,44 +346,48 @@
 
 // Express
 
-// let express = require("express");
-// let app = express();
-// let fs = require("fs");
-// let movies = JSON.parse(fs.readFileSync("../Data/products.json", "utf-8"));
+let express = require("express");
+let app = express();
+let fs = require("fs");
+let movies = JSON.parse(fs.readFileSync("../Data/products.json", "utf-8"));
 
-// app.listen(8000, () => {
-//     console.log("Server started working....................");
-// })
-
-
-// // get method
-// app.get("/api/v1/movies", (req, res) => {
-//     res.status(200).json({
-//         status: "success",
-//         data: {
-//             movies: movies
-//         }
-//     });
-
-// })
-// app.use(express.json());
+app.listen(8000, () => {
+    console.log("Server started working....................");
+})
 
 
-// // post method
-// app.post("/api/v1/movies", (req, res) => {
-//     console.log(req.body)
-//     let newID = movies[movies.length - 1].id + 1;
-//     let newMovie = { id: newID, ...req.body };
-//     movies.push(newMovie);
-//     fs.writeFile("../Data/products.json", JSON.stringify(movies), () => {
-//         res.status(201).json({
-//             status: "success",
-//             data: {
-//                 movies: newMovie
-//             }
-//         })
-//     })
+// get method
+app.get("/api/v1/movies", (req, res) => {
+    res.status(200).json({
+        status: "success",
+        data: {
+            movies: movies
+        }
+    });
 
-// })
+})
+app.use(express.json());
 
 
+// post method
+app.post("/api/v1/movies", (req, res) => {
+    console.log(req.body)
+    let newID = movies[movies.length - 1].id + 1;
+    let newMovie = { id: newID, ...req.body };
+    movies.push(newMovie);
+    fs.writeFile("../Data/products.json", JSON.stringify(movies), () => {
+        res.status(201).json({
+            status: "success",
+            data: {
+                movies: newMovie
+            }
+        })
+    })
+
+})
+
+
+app.get("/api/v1/movies/:id", (req, res) => {
+    console.log(req.params)
+    req.send("Hello")
+})
