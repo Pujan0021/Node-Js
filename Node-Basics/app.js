@@ -357,9 +357,14 @@ app.listen(8000, () => {
 
 
 // get method
+app.use((req, res, next) => {
+    req.requestedAt = new Date().toISOString();
+    next();
+})
 app.get("/api/v1/movies", (req, res) => {
     res.status(200).json({
         status: "success",
+        requestedAt: req.requestedAt,
         data: {
             movies: movies
         }
@@ -378,6 +383,7 @@ app.post("/api/v1/movies", (req, res) => {
     fs.writeFile("../Data/products.json", JSON.stringify(movies), () => {
         res.status(201).json({
             status: "success",
+
             data: {
                 movies: newMovie
             }
