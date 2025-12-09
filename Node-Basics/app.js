@@ -345,23 +345,25 @@
 
 
 // Express
-
 let express = require("express");
 let app = express();
+let morgan = require("morgan");
 let fs = require("fs");
 let movies = JSON.parse(fs.readFileSync("../Data/products.json", "utf-8"));
-
+app.use(express.json());
+const mobileRoute = express.Router();
+app.use('/api/v1/movies', mobileRoute)
 app.listen(8000, () => {
     console.log("Server started working....................");
 })
-
+mobileRoute.use(morgan('dev'));
 
 // get method
-app.use((req, res, next) => {
+mobileRoute.use((req, res, next) => {
     req.requestedAt = new Date().toISOString();
     next();
 })
-app.get("/api/v1/movies", (req, res) => {
+mobileRoute.get("/", (req, res) => {
     res.status(200).json({
         status: "success",
         requestedAt: req.requestedAt,
@@ -371,11 +373,10 @@ app.get("/api/v1/movies", (req, res) => {
     });
 
 })
-app.use(express.json());
 
 
 // post method
-app.post("/api/v1/movies", (req, res) => {
+mobileRoute.post("/", (req, res) => {
     console.log(req.body)
     let newID = movies[movies.length - 1].id + 1;
     let newMovie = { id: newID, ...req.body };
@@ -393,7 +394,7 @@ app.post("/api/v1/movies", (req, res) => {
 })
 
 
-app.get("/api/v1/movies/:id", (req, res) => {
+mobileRoute.get("/:id", (req, res) => {
 
     const id = req.params.id * 1;
     let movie = movies.find(elem => elem.id == id);
@@ -413,7 +414,7 @@ app.get("/api/v1/movies/:id", (req, res) => {
     })
 })
 
-app.patch('/api/v1/movies/:id', (req, res) => {
+mobileRoute.patch('/:id', (req, res) => {
     const id = req.params.id * 1;
     let movieToUpdate = movies.find(ele => ele.id === id);
     if (!movieToUpdate) {
@@ -437,7 +438,7 @@ app.patch('/api/v1/movies/:id', (req, res) => {
     })
 })
 
-app.delete("/api/v1/movies/:id", (req, res) => {
+mobileRoute.delete("/:id", (req, res) => {
     const id = req.params.id * 1;
     let movieToDelete = movies.find(ele => ele.id === id);
     if (!movieToDelete) {
