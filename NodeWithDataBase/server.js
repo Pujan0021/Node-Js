@@ -14,6 +14,27 @@ mongoose.connect(process.env.CONN_STR)
         console.error("DB connection failed:", err);
     });
 
+
+let movieSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: [true, "Name is a required Field!"]
+    },
+    duration: {
+        type: Number,
+        required: [true, "Name is a required Field!"]
+    },
+    rating: {
+        type: Number,
+
+    },
+    description: {
+        type: String,
+
+    }
+})
+const movie = mongoose.model("Movie", movieSchema)
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
