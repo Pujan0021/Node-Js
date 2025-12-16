@@ -18,11 +18,12 @@ mongoose.connect(process.env.CONN_STR)
 let movieSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, "Name is a required Field!"]
+        required: [true, "Name is a required Field!"],
+        unique: true
     },
     duration: {
         type: Number,
-        required: [true, "Name is a required Field!"]
+        required: [true, "Duration is a required Field!"]
     },
     rating: {
         type: Number,
@@ -33,7 +34,15 @@ let movieSchema = new mongoose.Schema({
 
     }
 })
-const movie = mongoose.model("Movie", movieSchema)
+const Movie = mongoose.model("Movie", movieSchema);
+
+const testMovie = new Movie({
+    name: "Ravanaa",
+    duration: 2300,
+    rating: 4,
+    description: "A horror movie. Restricted for under age"
+})
+testMovie.save().then(doc => console.log(doc)).catch(err => console.log(err, "Error Occured while saving a movie in DB"));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
