@@ -74,8 +74,8 @@ let movieSchema = new mongoose.Schema({
 
 let Movies = mongoose.model("Movie", movieSchema);
 
-// Routes
-app.get("/api/getMovies", async (req, res) => {
+// Get All Movies
+app.get("/api/Movies", async (req, res) => {
     try {
         let getAllMovies = await Movies.find();
         res.status(200).json({ status: "success", data: { getAllMovies } });
@@ -83,6 +83,7 @@ app.get("/api/getMovies", async (req, res) => {
         res.status(500).json({ status: "fail", message: err.message });
     }
 });
+// Get MOvies According to the Query
 app.get("/api/Movies/:id", async (req, res) => {
 
     // console.log(id);
@@ -94,9 +95,9 @@ app.get("/api/Movies/:id", async (req, res) => {
     } catch (err) {
         res.status(500).json({ status: "fail", message: err.message });
     }
-});
-
-app.post("/api/getMovies", async (req, res) => {
+})
+//Add Movies to the DataBase
+app.post("/api/Movies", async (req, res) => {
     try {
         let movie = await Movies.create(req.body);
         res.status(201).json({ status: "success", data: { movie } });
@@ -105,7 +106,8 @@ app.post("/api/getMovies", async (req, res) => {
     }
 });
 
-app.patch("/api/:id", async (req, res) => {
+//Update Existing Movies
+app.patch("/api/Movies/:id", async (req, res) => {
     let { id } = req.params;
     console.log(req.params)
     console.log(id)
@@ -115,6 +117,23 @@ app.patch("/api/:id", async (req, res) => {
         res.status(200).json({
             status: "success",
             data: updateMovie
+        })
+    } catch (err) {
+        res.status(400).json({ status: "fail", message: err.message });
+
+    }
+})
+//Delete the existing Movies
+app.delete("/api/Movies/:id", async (req, res) => {
+    let { id } = req.params;
+    console.log(req.params)
+    console.log(id)
+
+    try {
+        await Movies.findByIdAndDelete(id);
+        res.status(200).json({
+            status: "success",
+            data: null
         })
     } catch (err) {
         res.status(400).json({ status: "fail", message: err.message });
