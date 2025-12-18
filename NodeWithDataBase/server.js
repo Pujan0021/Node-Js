@@ -84,7 +84,7 @@ app.get("/api/getMovies", async (req, res) => {
     }
 });
 
-app.post("/api/createMovie", async (req, res) => {
+app.post("/api/movies", async (req, res) => {
     try {
         let movie = await Movies.create(req.body);
         res.status(201).json({ status: "success", data: { movie } });
@@ -92,6 +92,25 @@ app.post("/api/createMovie", async (req, res) => {
         res.status(400).json({ status: "fail", message: err.message });
     }
 });
+
+app.patch("/api/:id", async (req, res) => {
+    let { id } = req.params;
+    console.log(id)
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ status: "fail", message: "Invalid ID format" });
+    }
+
+    try {
+        let updateMovie = await Movies.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+        res.status(200).json({
+            status: "success",
+            data: updateMovie
+        })
+    } catch (err) {
+        res.status(400).json({ status: "fail", message: err.message });
+
+    }
+})
 
 // Start server
 const PORT = process.env.PORT || 5000;
