@@ -83,8 +83,20 @@ app.get("/api/getMovies", async (req, res) => {
         res.status(500).json({ status: "fail", message: err.message });
     }
 });
+app.get("/api/Movies/:id", async (req, res) => {
 
-app.post("/api/movies", async (req, res) => {
+    // console.log(id);
+    // console.log(req.params.id)
+
+    try {
+        let getAllMovies = await Movies.find({ _id: req.params.id });
+        res.status(200).json({ status: "success", data: { getAllMovies } });
+    } catch (err) {
+        res.status(500).json({ status: "fail", message: err.message });
+    }
+});
+
+app.post("/api/getMovies", async (req, res) => {
     try {
         let movie = await Movies.create(req.body);
         res.status(201).json({ status: "success", data: { movie } });
@@ -95,10 +107,8 @@ app.post("/api/movies", async (req, res) => {
 
 app.patch("/api/:id", async (req, res) => {
     let { id } = req.params;
+    console.log(req.params)
     console.log(id)
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({ status: "fail", message: "Invalid ID format" });
-    }
 
     try {
         let updateMovie = await Movies.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
