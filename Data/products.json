@@ -1,1 +1,173 @@
-[{"id":0,"name":"Samsung Galaxy S24 Ultra","series":"Galaxy S","image":"https://images.samsung.com/is/image/samsung/p6pim/in/sm-s928bzwdins/gallery/in-galaxy-s24-ultra-sm-s928-491263-sm-s928bzwdins-537264979"},{"id":1,"name":"Samsung Galaxy Z Fold5","series":"Galaxy Z","image":"https://images.samsung.com/is/image/samsung/p6pim/in/sm-f946bzkdins/gallery/in-galaxy-z-fold5-f946-sm-f946bzkdins-537264979"},{"id":2,"name":"Samsung Galaxy A54 5G","series":"Galaxy A","image":"https://images.samsung.com/is/image/samsung/p6pim/in/sm-a546ezwdins/gallery/in-galaxy-a54-5g-sm-a546-537264979"},{"id":4,"name":"Samsung Galaxy F15","series":"Galaxy F","image":"https://images.samsung.com/is/image/samsung/p6pim/in/sm-e156bzgdins/gallery/in-galaxy-f15-sm-e156-537264979"},{"id":6,"name":"MI","series":"Note","image":"Not Found"},{"id":7,"name":"MI","series":"Note","image":"Not Found"},{"id":8,"name":"Iphone","series":"Flat","image":"Not Found"},{"id":9,"name":"Iphone 11","series":"Apple ","image":"Not Found"},{"id":10,"name":"Hanuman2","series":"Galaxy M","image":"https://images.samsung.com/is/image/samsung/p6pim/in/sm-m146bdbdins/gallery/in-galaxy-m14-5g-sm-m146-537264979"}]
+[
+  {
+    "name": "Inception",
+    "duration": 148,
+    "rating": 8.8,
+    "description": "A thief enters dreams to steal secrets.",
+    "directors": ["Christopher Nolan"],
+    "images": "inception.jpg",
+    "price": "12.99"
+  },
+  {
+    "name": "Interstellar",
+    "duration": 169,
+    "rating": 8.6,
+    "description": "Explorers travel through a wormhole in space.",
+    "directors": ["Christopher Nolan"],
+    "images": "interstellar.jpg",
+    "price": "14.99"
+  },
+  {
+    "name": "The Dark Knight",
+    "duration": 152,
+    "rating": 9.0,
+    "description": "Batman faces the Joker in Gotham.",
+    "directors": ["Christopher Nolan"],
+    "images": "dark_knight.jpg",
+    "price": "13.99"
+  },
+  {
+    "name": "Avengers: Endgame",
+    "duration": 181,
+    "rating": 8.4,
+    "description": "Heroes unite to defeat Thanos.",
+    "directors": ["Anthony Russo", "Joe Russo"],
+    "images": "endgame.jpg",
+    "price": "15.99"
+  },
+  {
+    "name": "Titanic",
+    "duration": 195,
+    "rating": 7.9,
+    "description": "A love story aboard the doomed ship.",
+    "directors": ["James Cameron"],
+    "images": "titanic.jpg",
+    "price": "10.99"
+  },
+  {
+    "name": "The Matrix",
+    "duration": 136,
+    "rating": 8.7,
+    "description": "A hacker discovers reality is a simulation.",
+    "directors": ["Lana Wachowski", "Lilly Wachowski"],
+    "images": "matrix.jpg",
+    "price": "11.99"
+  },
+  {
+    "name": "Gladiator",
+    "duration": 155,
+    "rating": 8.5,
+    "description": "A Roman general seeks revenge.",
+    "directors": ["Ridley Scott"],
+    "images": "gladiator.jpg",
+    "price": "9.99"
+  },
+  {
+    "name": "Jurassic Park",
+    "duration": 127,
+    "rating": 8.1,
+    "description": "Dinosaurs brought back to life cause chaos.",
+    "directors": ["Steven Spielberg"],
+    "images": "jurassic_park.jpg",
+    "price": "12.49"
+  },
+  {
+    "name": "The Lion King",
+    "duration": 88,
+    "rating": 8.5,
+    "description": "A lion cub becomes king.",
+    "directors": ["Roger Allers", "Rob Minkoff"],
+    "images": "lion_king.jpg",
+    "price": "8.99"
+  },
+  {
+    "name": "Forrest Gump",
+    "duration": 142,
+    "rating": 8.8,
+    "description": "The life journey of Forrest Gump.",
+    "directors": ["Robert Zemeckis"],
+    "images": "forrest_gump.jpg",
+    "price": "10.49"
+  },
+  {
+    "name": "The Shawshank Redemption",
+    "duration": 142,
+    "rating": 9.3,
+    "description": "Two imprisoned men bond over years.",
+    "directors": ["Frank Darabont"],
+    "images": "shawshank.jpg",
+    "price": "11.49"
+  },
+  {
+    "name": "Fight Club",
+    "duration": 139,
+    "rating": 8.8,
+    "description": "An insomniac meets a soap salesman.",
+    "directors": ["David Fincher"],
+    "images": "fight_club.jpg",
+    "price": "9.49"
+  },
+  {
+    "name": "Pulp Fiction",
+    "duration": 154,
+    "rating": 8.9,
+    "description": "Interwoven stories of crime in LA.",
+    "directors": ["Quentin Tarantino"],
+    "images": "pulp_fiction.jpg",
+    "price": "10.99"
+  },
+  {
+    "name": "The Godfather",
+    "duration": 175,
+    "rating": 9.2,
+    "description": "The aging patriarch transfers power.",
+    "directors": ["Francis Ford Coppola"],
+    "images": "godfather.jpg",
+    "price": "12.99"
+  },
+  {
+    "name": "The Godfather Part II",
+    "duration": 202,
+    "rating": 9.0,
+    "description": "The Corleone family saga continues.",
+    "directors": ["Francis Ford Coppola"],
+    "images": "godfather2.jpg",
+    "price": "13.49"
+  },
+  {
+    "name": "The Social Network",
+    "duration": 120,
+    "rating": 7.7,
+    "description": "The founding of Facebook.",
+    "directors": ["David Fincher"],
+    "images": "social_network.jpg",
+    "price": "8.99"
+  },
+  {
+    "name": "Parasite",
+    "duration": 132,
+    "rating": 8.6,
+    "description": "A poor family infiltrates a rich household.",
+    "directors": ["Bong Joon-ho"],
+    "images": "parasite.jpg",
+    "price": "11.99"
+  },
+  {
+    "name": "Whiplash",
+    "duration": 106,
+    "rating": 8.5,
+    "description": "A drummer pushed by his instructor.",
+    "directors": ["Damien Chazelle"],
+    "images": "whiplash.jpg",
+    "price": "9.99"
+  },
+  {
+    "name": "La La Land",
+    "duration": 128,
+    "rating": 8.0,
+    "description": "A musician and actress fall in love.",
+    "directors": ["Damien Chazelle"],
+    "images": "lalaland.jpg",
+    "price": "10.49"
+  }
+] 

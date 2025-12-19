@@ -66,10 +66,13 @@ mongoose.connect(process.env.CONN_STR)
 
 // Schema
 let movieSchema = new mongoose.Schema({
-    name: { type: String, required: [true, "Name is a required Field!"] },
+    name: { type: String, required: [true, "Name is a required Field!"], unique: true },
     duration: { type: Number, required: [true, "Duration is a required Field!"] },
-    rating: Number,
-    description: String
+    rating: { type: Number },
+    description: { type: String, trim: true },
+    directors: { type: [String] },
+    images: { type: String },
+    price: { type: String },
 });
 
 let Movies = mongoose.model("Movie", movieSchema);
@@ -83,7 +86,7 @@ app.get("/api/Movies", async (req, res) => {
         res.status(500).json({ status: "fail", message: err.message });
     }
 });
-// Get MOvies According to the Query
+// Get Movies According to the Query
 app.get("/api/Movies/:id", async (req, res) => {
 
     // console.log(id);
@@ -124,10 +127,11 @@ app.patch("/api/Movies/:id", async (req, res) => {
     }
 })
 //Delete the existing Movies
+
 app.delete("/api/Movies/:id", async (req, res) => {
     let { id } = req.params;
-    console.log(req.params)
-    console.log(id)
+    // console.log(req.params)
+    // console.log(id)
 
     try {
         await Movies.findByIdAndDelete(id);
