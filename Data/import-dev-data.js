@@ -37,18 +37,18 @@ const deleteMovies = async () => {
     // process.exit();
 }
 
-// const createMovies = async () => {
-//     try {
-//         await Movies.create(readFile);
-//         console.log("....Data SuccessFully Imported....")
+const createMovies = async () => {
+    try {
+        await Movies.create(readFile);
+        console.log("....Data SuccessFully Imported....")
 
-//     } catch (err) {
-//         console.log("Error Occured ! ", err.message)
+    } catch (err) {
+        console.log("Error Occured ! ", err.message)
 
-//     }
-//     process.exit()
-// }
-// console.log(process.env.argv)
+    }
+    process.exit()
+}
+console.log(process.env.argv)
 
 deleteMovies();
-// createMovies();
+createMovies();
