@@ -81,6 +81,11 @@ let Movies = mongoose.model("Movie", movieSchema);
 app.get("/api/Movies", async (req, res) => {
     try {
         let getAllMovies = await Movies.find(req.query);
+        // let getAllMovies = await Movies.find()
+        //     .where('duration')
+        //     .equals(req.query.duration)
+        //     .where('rating')
+        //     .equals(req.query.rating);
         // console.log(getAllMovies)
         res.status(200).json({ status: "success", data: { getAllMovies } });
     } catch (err) {
