@@ -66,7 +66,7 @@ mongoose.connect(process.env.CONN_STR)
 
 // Schema
 let movieSchema = new mongoose.Schema({
-    name: { type: String, required: [true, "Name is a required Field!"], unique: true },
+    name: { type: String, required: [true, "Name is a required Field!"] },
     duration: { type: Number, required: [true, "Duration is a required Field!"] },
     rating: { type: Number },
     description: { type: String, trim: true },
@@ -80,7 +80,8 @@ let Movies = mongoose.model("Movie", movieSchema);
 // Get All Movies
 app.get("/api/Movies", async (req, res) => {
     try {
-        let getAllMovies = await Movies.find();
+        let getAllMovies = await Movies.find(req.query);
+        // console.log(getAllMovies)
         res.status(200).json({ status: "success", data: { getAllMovies } });
     } catch (err) {
         res.status(500).json({ status: "fail", message: err.message });
@@ -102,7 +103,12 @@ app.get("/api/Movies/:id", async (req, res) => {
 //Add Movies to the DataBase
 app.post("/api/Movies", async (req, res) => {
     try {
-        let movie = await Movies.create(req.body);
+        if (!req.body.name || !req.body.directors) {
+            return res.status(400).json({ status: "fail", message: "Name and director are required" });
+        }
+
+        const movie = await Movies.create(req.body);
+        console.log(movie)
         res.status(201).json({ status: "success", data: { movie } });
     } catch (err) {
         res.status(400).json({ status: "fail", message: err.message });
