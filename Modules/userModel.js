@@ -8,7 +8,7 @@ const user = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        validator: [validator.isEmail, 'Please enter a valid email.']
+        validate: [validator.isEmail, 'Please enter a valid email.']
     },
     password: {
         type: String,
@@ -18,7 +18,7 @@ const user = new mongoose.Schema({
     confirmPassword: {
         type: String,
         required: true,
-        validator: function (val) {
+        validate: function (val) {
             return val == this.password;
         }
     }
